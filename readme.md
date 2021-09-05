@@ -4,9 +4,6 @@ Laravel based wallet web app
 Wallet is a laravel and Vuejs based wallet web app, integrated with Stripe
 for card payments and PayPal APIs.
 
-Clone the repo and have fun.
-
-
 <img src="screenshots/wallet.png">
 
 

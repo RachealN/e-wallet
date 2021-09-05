@@ -4,8 +4,8 @@ return array(
 
 
 //TODO:Racheal=> Remember to Transfer this to .env file
-'client_id' =>'',
-'secret' => '',
+'client_id' =>'Ab7Aif-97DE7MTTex5xV_pVu9LRCoXlcUlpGlkILmnQE6gu7i8wiiBtm3ErHDiEtp5Gf_KMXhfX4NWw6',
+'secret' => 'EDXYRLQFxl_Od-PNFRDEknrdiyukSQHoGXcaQlJjioEkiVnXPgsjptXGhlPHsOB_5TyflL0i_NoE-UJH',
 /**
 * SDK configuration 
 */

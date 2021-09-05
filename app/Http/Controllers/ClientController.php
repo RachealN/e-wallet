@@ -16,7 +16,6 @@ class ClientController extends Controller
         $transactions=Transaction::where('client_id',$client->id)->take(5)->get();
         $acc_balance=Account::where('client_id',$client->id)->first();
         return view('clients/dashboard',compact('acc_balance','transactions'));
-        // dd($user);
     }
     public function getProfile()
     {

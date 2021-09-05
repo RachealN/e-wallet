@@ -45,8 +45,10 @@
                     <div class="panel-body">
                 <div class="text-center" id="author">
 
-            <h3>Balance</h3>
-            <h2> USD</h2>
+                <h3>Balance</h3>
+                <h2 v-model="acc_balance">  {{ acc_balance.balance}} USD</h2>
+            </div>
+            
             </div>
         </div>
     </div>
@@ -57,18 +59,16 @@
 <script>
 
 export default {
-    
-    data() {
-        return {
-            transactions: [
-                { 
-                    trans_id: '27WYE876' ,
-                    amount: '5000',
-                    date: '2021-09-03',
-                    type: 'Card',
-                 }
-            ]
-        };
+    props: {
+        transactions: {
+            type: Array,
+            required: true
+        },
+
+        acc_balance : {
+            type: Array,
+            required: true
+        },
     },
 
 }

@@ -45347,6 +45347,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
 //
@@ -45404,14 +45406,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'send',
+
     data: function data() {
         return {
-            contact: '',
-            amount: '',
-            description: ''
+            success: false,
+            error: false,
+            loading: false,
+            clientDetails: {
+                contact: '',
+                amount: '',
+                description: ''
+            }
+
         };
+    },
+
+
+    methods: {
+        sendMoney: function sendMoney() {
+            var _this = this;
+
+            // console.log( this.clientDetails)
+            this.loading = true, __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/send', this.clientDetails).then(function (res) {
+                _this.success = true;
+                console.log(res.data, 'response');
+            }).catch(function (error) {
+                _this.error = true;
+                console.log(error);
+            }).finally(function () {
+                _this.loading = false;
+            });
+        }
     }
+
 });
 
 /***/ }),
@@ -45431,11 +45461,11 @@ var render = function() {
           _c(
             "form",
             {
-              attrs: {
-                role: "form",
-                id: "payment-form",
-                action: "",
-                method: "post"
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.sendMoney.apply(null, arguments)
+                }
               }
             },
             [
@@ -45451,8 +45481,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.contact,
-                          expression: "contact"
+                          value: _vm.clientDetails.contact,
+                          expression: "clientDetails.contact"
                         }
                       ],
                       staticClass: "form-control",
@@ -45461,13 +45491,17 @@ var render = function() {
                         name: "contact",
                         placeholder: "e.g 0782578907"
                       },
-                      domProps: { value: _vm.contact },
+                      domProps: { value: _vm.clientDetails.contact },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.contact = $event.target.value
+                          _vm.$set(
+                            _vm.clientDetails,
+                            "contact",
+                            $event.target.value
+                          )
                         }
                       }
                     })
@@ -45485,8 +45519,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.amount,
-                          expression: "amount"
+                          value: _vm.clientDetails.amount,
+                          expression: "clientDetails.amount"
                         }
                       ],
                       staticClass: "form-control",
@@ -45495,13 +45529,17 @@ var render = function() {
                         name: "amount",
                         placeholder: "amount to send"
                       },
-                      domProps: { value: _vm.amount },
+                      domProps: { value: _vm.clientDetails.amount },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.amount = $event.target.value
+                          _vm.$set(
+                            _vm.clientDetails,
+                            "amount",
+                            $event.target.value
+                          )
                         }
                       }
                     })
@@ -45519,8 +45557,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.description,
-                      expression: "description"
+                      value: _vm.clientDetails.description,
+                      expression: "clientDetails.description"
                     }
                   ],
                   staticClass: "form-control",
@@ -45529,13 +45567,17 @@ var render = function() {
                     id: "description",
                     placeholder: "short description"
                   },
-                  domProps: { value: _vm.description },
+                  domProps: { value: _vm.clientDetails.description },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.description = $event.target.value
+                      _vm.$set(
+                        _vm.clientDetails,
+                        "description",
+                        $event.target.value
+                      )
                     }
                   }
                 })

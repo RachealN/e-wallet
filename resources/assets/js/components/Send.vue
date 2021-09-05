@@ -7,7 +7,7 @@
         <div class="panel-body ">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <form role="form" id="payment-form" action="" method="post">
+                    <form @submit.prevent="sendMoney">
 
                         <div class="row">
                             <div class="col-md-6">
@@ -18,7 +18,7 @@
                                         class="form-control" 
                                         name="contact" 
                                         placeholder="e.g 0782578907"
-                                        v-model="contact" />
+                                        v-model="clientDetails.contact" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -29,7 +29,7 @@
                                         class="form-control" 
                                         name="amount" 
                                         placeholder="amount to send"
-                                        v-model="amount"/>
+                                        v-model="clientDetails.amount"/>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                 name="description" 
                                 id="description" 
                                 placeholder="short description"
-                                v-model="description">
+                                v-model="clientDetails.description">
                             </textarea>
                         </div>
                         <div class="form-group">
@@ -55,13 +55,45 @@
 </template>
 
 <script>
+import axios from 'axios';
     export default {
+        name: 'send',
+
         data() {
             return {
-                contact: '',
-                amount: '',
-                description: ''
+                success: false,
+                error: false,
+                loading: false,
+                clientDetails: {
+                    contact: '',
+                    amount: '',
+                    description: '',
+            },
+
             }
         },
+
+        methods: {
+            sendMoney() {
+                // console.log( this.clientDetails)
+                this.loading = true,
+                axios.post('/send', this.clientDetails)
+
+                 .then((res) => {
+                    this.success = true;
+                    console.log(res.data, 'response')
+                     
+                 })
+                 .catch((error) => {
+                    this.error = true;
+                    console.log(error)
+
+                 }).finally(() => {
+                    this.loading =  false
+                 });
+                
+            }
+        },
+        
     }
 </script>

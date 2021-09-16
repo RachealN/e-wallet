@@ -70,7 +70,6 @@ class ClientAuthController extends Controller
             'password' => 'required',
         ]);
         // $secret_key = $this->generate_string(30);
-        // $client = Client::create(request(['names', 'contact','email', 'password']));
         $client = new Client();
         $client->names = $request->names;
         $client->contact=$request->contact;
@@ -84,9 +83,15 @@ class ClientAuthController extends Controller
         $account->save();
         
         auth()->login($client);
-        \Session::put('success','Successfylly Registered');
-        return redirect()->route('home');
+        $payload = [
+            'response' => $client,
+            'message' => 'Successfully Registered',
+            
+        ];
+        return response()->json($payload);
     }
+
+
     public function logout()
     {
         Auth::guard('client')->logout();

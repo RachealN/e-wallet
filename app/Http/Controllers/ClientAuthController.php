@@ -86,11 +86,9 @@ class ClientAuthController extends Controller
         $payload = [
             'response' => $client,
             'message' => 'Successfully Registered',
-            
         ];
         return response()->json($payload);
     }
-
 
     public function logout()
     {

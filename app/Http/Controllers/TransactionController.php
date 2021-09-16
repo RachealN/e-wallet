@@ -27,8 +27,8 @@ class TransactionController extends Controller
     }
     public function postSend(Request $request)
     {
-        $client = auth()->guard('client')->user();
-        $sender_account=Account::where('client_id',$client->id)->first();
+        // $client = auth()->guard('client')->user();
+        $sender_account=Account::where('client_id',1)->first();
         $balance=$sender_account->balance;
         $balance=(float)$balance;
 
@@ -63,12 +63,22 @@ class TransactionController extends Controller
             $sender_account->balance=$remaining_balance;
             $sender_account->save();
 
-            \Session::put('success','Funds sent successfully');
-            return redirect()->route('home');
+            $payload = [
+                'response' => $sender_account,
+                'message' => 'Funds sent successfully',
+            ];
+            // \Session::put('success','Funds sent successfully');
+            return response()->json($payload);
         }else
         {
-            \Session::put('error','Insufficient funds');
-            return redirect()->route('send');
+            $error = [
+                'response' => $sender_account,
+                'error' => 'Insufficient funds',
+            ];
+
+            return response()->json($error);
+            // \Session::put('error','Insufficient funds');
+            // return redirect()->route('send');
         }
 
 

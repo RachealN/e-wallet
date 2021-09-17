@@ -65,10 +65,6 @@ Route::group(['middleware' => ['client']], function () {
     ['as'=>'send',
     'uses'=>'TransactionController@getSend'
     ]);
-    // Route::post('/send', 
-    // ['as'=>'send',
-    // 'uses'=>'TransactionController@postSend'
-    // ]);
     /**
      * Credit/debit card routes
      */

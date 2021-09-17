@@ -45600,11 +45600,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.success = response.data.error;
                 console.log(_this.success);
             }).catch(function (error) {
-
-                // if (error.response.message === 422) {
                 _this.errors = error;
                 console.log(_this.errors, 'hello');
-                //  }
             }).finally(function () {
                 _this.loading = false;
             });
@@ -45868,56 +45865,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {

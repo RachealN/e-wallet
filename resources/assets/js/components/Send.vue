@@ -82,11 +82,8 @@ import axios from 'axios';
                      
                  })
                  .catch((error) => {
-                     
-                    // if (error.response.message === 422) {
                         this.errors = error;
                         console.log(this.errors,'hello')
-                    //  }
                  }).finally(() => {
                     this.loading =  false
                  });

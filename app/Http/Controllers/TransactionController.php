@@ -63,12 +63,19 @@ class TransactionController extends Controller
             $sender_account->balance=$remaining_balance;
             $sender_account->save();
 
-            \Session::put('success','Funds sent successfully');
-            return redirect()->route('home');
+            $payload = [
+                'response' => $sender_account,
+                'message' => 'Funds sent successfully',
+            ];
+            return response()->json($payload);
         }else
         {
-            \Session::put('error','Insufficient funds');
-            return redirect()->route('send');
+            $error = [
+                'response' => $sender_account,
+                'error' => 'Insufficient funds',
+            ];
+
+            return response()->json($error);
         }
 
 
